@@ -14,7 +14,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     //Constants
     let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
-    let APP_ID = "8a5f77889dbdb03403fcdbfe3f053215"
+    let APP_ID = ""
     
     
     //TODO: Declare instance variables here
@@ -90,12 +90,9 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     //MARK: - JSON Parsing
     /***************************************************************/
     
-    //Write the updateWeatherData method here:
     func updateWeatherData(data: Data) {
         do {
-            //            weatherDataModel = try JSONDecoder().decode(WeatherDataModel.self, from: data)
-            let decoder = JSONDecoder()
-            weatherDataModel = try decoder.decode(WeatherDataModel.self, from: data)
+            weatherDataModel = try JSONDecoder().decode(WeatherDataModel.self, from: data)
             DispatchQueue.main.async {
                 self.updateUIWithWeatherData()
             }
@@ -145,7 +142,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         
     }
     
-    //Write the updateUIWithWeatherData method here:
+    //updateUIWithWeatherData method:
     func updateUIWithWeatherData(){
         temperatureLabel.text = "\(Int(weatherDataModel.main.temp - 273))"
         cityLabel.text = weatherDataModel.name
@@ -161,7 +158,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     /***************************************************************/
     
     
-    //Write the didUpdateLocations method here:
+    //didUpdateLocations method:
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 { //if it is below zero it is invalid this is why we check this
@@ -176,7 +173,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         }
     }
     
-    //Write the didFailWithError method here:
+    //didFailWithError method:
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
         cityLabel.text = "Location unavailable!"
@@ -190,7 +187,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     /***************************************************************/
     
     
-    //Write the userEnteredANewCityName Delegate method here:
+    //userEnteredANewCityName Delegate method:
     func userEnteredANewCityName(city: String) {
         print(city)
         
@@ -199,7 +196,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     }
     
     
-    //Write the PrepareForSegue Method here
+    //PrepareForSegue method:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "changeCityName" {
             let destinationVC = segue.destination as! ChangeCityViewController
