@@ -14,7 +14,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
     
     //Constants
     let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
-    let APP_ID = ""
+    let APP_ID = "8a5f77889dbdb03403fcdbfe3f053215"
     
     
     //TODO: Declare instance variables here
@@ -54,7 +54,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate, Change
         
         dataTask?.cancel()
         
-        if var urlComponents = URLComponents(string: WEATHER_URL) {
+        if var urlComponents = URLComponents(string: url) {
             urlComponents.query = parameters
             
             guard let url = urlComponents.url else { return }
